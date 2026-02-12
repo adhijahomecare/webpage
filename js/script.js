@@ -114,4 +114,65 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // ---- Enquiry Form: "Other" checkbox toggle ----
+    const otherCheckbox = document.getElementById('otherCheckbox');
+    const otherWrapper = document.getElementById('otherInputWrapper');
+
+    if (otherCheckbox && otherWrapper) {
+        otherCheckbox.addEventListener('change', () => {
+            otherWrapper.classList.toggle('visible', otherCheckbox.checked);
+            if (!otherCheckbox.checked) {
+                document.getElementById('otherService').value = '';
+            }
+        });
+    }
+
+    // ---- Enquiry Form: Submission via Web3Forms ----
+    const enquiryForm = document.getElementById('enquiryForm');
+    const formResult = document.getElementById('formResult');
+    const submitBtn = document.getElementById('enquirySubmitBtn');
+
+    if (enquiryForm) {
+        enquiryForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Validate at least one service is checked
+            const checkedServices = enquiryForm.querySelectorAll('input[name="Services"]:checked');
+            if (checkedServices.length === 0) {
+                formResult.textContent = 'Please select at least one service.';
+                formResult.className = 'form-result error';
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+            formResult.textContent = '';
+
+            try {
+                const formData = new FormData(enquiryForm);
+                const response = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+
+                if (data.success) {
+                    formResult.textContent = '\u2713 Thank you! Your enquiry has been submitted. We will contact you shortly.';
+                    formResult.className = 'form-result success';
+                    enquiryForm.reset();
+                    otherWrapper.classList.remove('visible');
+                } else {
+                    formResult.textContent = 'Something went wrong. Please try again or call us directly.';
+                    formResult.className = 'form-result error';
+                }
+            } catch (error) {
+                formResult.textContent = 'Network error. Please try again or call us at +91 79800 49050.';
+                formResult.className = 'form-result error';
+            }
+
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Enquiry';
+        });
+    }
 });

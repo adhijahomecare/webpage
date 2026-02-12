@@ -32,6 +32,7 @@
                 <a href="#faqs" class="nav-link">FAQs</a>
                 <a href="#about" class="nav-link">About Us</a>
                 <a href="#contact" class="nav-link">Contact Us</a>
+                <a href="#enquiry" class="nav-link">Enquiry</a>
                 <a href="#emergency" class="nav-link nav-emergency">Emergency Contact</a>
             </nav>
             <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation">
@@ -400,6 +401,91 @@
                     <p class="contact-note">South Kolkata, North Kolkata, Salt Lake, New Town &amp; surrounding regions</p>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- ============ ENQUIRY FORM ============ -->
+    <section id="enquiry" class="enquiry-section blue-bg-section">
+        <div class="section-bg-overlay"></div>
+        <div class="container">
+            <h2 class="section-title">Book a Service / Enquiry</h2>
+            <div class="gold-divider center"></div>
+            <p class="enquiry-subtitle">Fill in the details below and our team will get back to you shortly.</p>
+
+            <form id="enquiryForm" action="https://api.web3forms.com/submit" method="POST" class="enquiry-form">
+                <!-- Web3Forms access key -->
+                <input type="hidden" name="access_key" value="1d5ae185-b75e-4088-b176-b7d7eb4f2df5">
+                <input type="hidden" name="subject" value="New Enquiry - Adhija Home Care">
+                <input type="hidden" name="from_name" value="Adhija Home Care Website">
+                <!-- Honeypot spam protection -->
+                <input type="checkbox" name="botcheck" class="hidden" style="display:none;">
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="ptName">Patient Full Name <span class="required">*</span></label>
+                        <input type="text" id="ptName" name="Patient Name" required placeholder="Enter patient's full name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ptAge">Age <span class="required">*</span></label>
+                        <input type="number" id="ptAge" name="Age" required min="0" max="150" placeholder="e.g. 65">
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="ptAddress">Address <span class="required">*</span></label>
+                        <textarea id="ptAddress" name="Address" required rows="2" placeholder="Full address including locality and pin code"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ptPhone">Phone Number <span class="required">*</span></label>
+                        <input type="tel" id="ptPhone" name="Phone" required placeholder="+91 XXXXX XXXXX">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="services-label">Services Required <span class="required">*</span></label>
+                    <div class="checkbox-grid">
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="Services" value="ICU Setup at Home">
+                            <span class="checkmark"></span>
+                            <span>ICU Setup at Home</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="Services" value="24/7 Professional Nursing">
+                            <span class="checkmark"></span>
+                            <span>24/7 Professional Nursing</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="Services" value="12/24 Hour Caregiver Support">
+                            <span class="checkmark"></span>
+                            <span>12/24 Hour Caregiver Support</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="Services" value="Physiotherapy / Doctor Visit">
+                            <span class="checkmark"></span>
+                            <span>Physiotherapy / Doctor Visit</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="Services" value="Blood Collection">
+                            <span class="checkmark"></span>
+                            <span>Blood Collection</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="Services" value="Other" id="otherCheckbox">
+                            <span class="checkmark"></span>
+                            <span>Other</span>
+                        </label>
+                    </div>
+                    <div class="other-input-wrapper" id="otherInputWrapper">
+                        <input type="text" id="otherService" name="Other Service Details" placeholder="Please specify the service you need...">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-gold enquiry-submit" id="enquirySubmitBtn">
+                    <i class="fas fa-paper-plane"></i> Submit Enquiry
+                </button>
+                <div id="formResult" class="form-result"></div>
+            </form>
         </div>
     </section>
 
